@@ -1,3 +1,8 @@
 version: 1.0.{build}
+platform:
+- x64
+environment:
+  nodejs_version: "6"
 on_success:
 - electron-forge publish --target=s3
+build: off
