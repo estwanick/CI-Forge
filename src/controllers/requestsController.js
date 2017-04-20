@@ -81,7 +81,7 @@ app.controller('requestsController',
         }
         $scope.requestList = [];
         resultsCache.setNewDataFlag(true);
-        urlCounter = 0;
+        //urlCounter = 0;
         delayedRequest(0, delay);
     };
 

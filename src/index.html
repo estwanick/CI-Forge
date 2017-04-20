@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html data-ng-csp="">
+<html ng-csp>
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-  <link rel="stylesheet" href="public/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="style/style.css"/>
   <link rel="stylesheet" href="style/navbar-fixed-side.css"/>
 </head>
-<body ng-app="autoFuzzer" ng-controller="mainController" ng-csp>
+<body ng-app="autoFuzzer" ng-controller="mainController">
 
   <div class="container-fluid">
     <div class="row">
@@ -43,31 +43,37 @@
     <div class="footer">
     </div>
   </div>
-  <script>window.$ = window.jQuery = require('./public/node_modules/jquery/dist/jquery.min.js');</script>
-  <script type="text/javascript" src="public/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="public/node_modules/angular/angular.js"></script>
-  <script type="text/javascript" src="public/node_modules/angular-route/angular-route.js"></script>
-  <script type="text/javascript" src="public/node_modules/angular-sanitize/angular-sanitize.js"></script>
-  <script type="text/javascript" src="public/node_modules/angular-modal-service/dst/angular-modal-service.min.js"></script>
 
-  <script type="text/javascript" src="public/bower_components/ace-builds/src-min-noconflict/ace.js"></script>
-  <script type="text/javascript" src="public/bower_components/angular-ui-ace/ui-ace.js"></script>
-  
-  <script type="text/javascript" src="public/node_modules/vkbeautify/index.js"></script>
-  
-  <script type="text/javascript" src="js/app.js"></script>-->
-  <script type="text/javascript" src="js/router.js"></script>
-  <script type="text/javascript" src="services/urlList.js"></script>
-  <script type="text/javascript" src="services/requestResult.js"></script>
-  <script type="text/javascript" src="services/resultsCache.js"></script>
-  <script type="text/javascript" src="services/requestHistory.js"></script>
-  <script type="text/javascript" src="services/appConstants.js"></script>
-  <script type="text/javascript" src="controllers/mainController.js"></script>
-  <script type="text/javascript" src="controllers/requestsController.js"></script>
-  <script type="text/javascript" src="controllers/resultController.js"></script>
-  <script type="text/javascript" src="controllers/historyController.js"></script>
-  <script type="text/javascript" src="controllers/modalController.js"></script>
-  <script type="text/javascript" src="directives/attack-selector.js"></script>
+  <script>
+    var jQuery = require('jquery');
+    let boostrap = require('bootstrap');
+
+    require('angular');
+    require('angular-route');
+    require('angular-sanitize');
+    require('angular-modal-service');
+    require('./bower_components/ace-builds/src-min-noconflict/ace.js');
+    require('./bower_components/angular-ui-ace/ui-ace.js');
+
+    let app = angular.module('autoFuzzer', ['ngRoute', 'ngSanitize', 'ui.ace', 'angularModalService']);
+    let vkbeautify = require('vkbeautify');
+    
+    require('./js/router.js');
+    require('./services/urlList.js');
+    require('./services/requestResult.js');
+    require('./services/resultsCache.js');
+    require('./services/requestHistory.js');
+    require('./services/appConstants.js');
+    require('./controllers/mainController.js');
+    require('./controllers/requestsController.js');
+    require('./controllers/resultController.js');
+    require('./controllers/historyController.js');
+    require('./controllers/modalController.js');
+    require('./directives/attack-selector.js');
+    
+  </script>
+
+
 
 </body>
 </html>
