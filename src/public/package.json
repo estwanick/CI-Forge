@@ -16,6 +16,7 @@
     "bootstrap": "^3.3.7",
     "jquery": "^3.1.1",
     "jsoneditor": "^5.5.11",
-    "read-file": "^0.2.0"
+    "read-file": "^0.2.0",
+    "vkbeautify": "^0.99.2"
   }
 }
