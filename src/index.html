@@ -46,7 +46,7 @@
 
   <script>
     module.paths.push(__dirname+'/node_modules')
-    var jQuery = require('jquery');
+    window.$ = window.jQuery = require('jquery');
     let boostrap = require('bootstrap');
 
     require('angular');
