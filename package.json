@@ -41,6 +41,10 @@
         "bucket": "auto-fuzzer-dev-build",
         "public": true
       },
+      "github_repository": {
+        "owner": "estwanick",
+        "name": "CI-Forge"
+      },
       "windowsStoreConfig": {
         "packageName": "",
         "name": "forgeapp"
