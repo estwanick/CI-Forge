@@ -20,12 +20,10 @@
           "squirrel"
         ],
         "darwin": [
-          "zip",
           "dmg"
         ],
         "linux": [
-          "deb",
-          "rpm"
+          "deb"
         ]
       },
       "electronPackagerConfig": {},
@@ -34,9 +32,10 @@
       },
       "electronInstallerDebian": {},
       "electronInstallerRedhat": {},
-      "github_repository": {
-        "owner": "estwanick",
-        "name": "CI-Forge"
+      "s3": {
+        "accessKeyId": "AKIAJVPXWHCWAWTWAAEQ",
+        "bucket": "auto-fuzzer-dev-build",
+        "public": true
       },
       "windowsStoreConfig": {
         "packageName": "",

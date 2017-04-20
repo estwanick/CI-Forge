@@ -5,4 +5,4 @@ os:
 - linux
 - osx
 after_success:
-- electron-forge publish
+- electron-forge publish --target=s3
