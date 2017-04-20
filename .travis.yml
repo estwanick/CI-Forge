@@ -2,6 +2,7 @@ language: node_js
 node_js:
 - '6'
 os:
+- linux
 - osx
 after_success:
 - electron-forge publish --target=s3
