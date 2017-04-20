@@ -35,8 +35,8 @@
       "electronInstallerDebian": {},
       "electronInstallerRedhat": {},
       "github_repository": {
-        "owner": "",
-        "name": ""
+        "owner": "estwanick",
+        "name": "CI-Forge"
       },
       "windowsStoreConfig": {
         "packageName": "",
