@@ -20,5 +20,3 @@ test_script:
 
 on_success:
 - electron-forge publish --target=s3
-
-build: off
