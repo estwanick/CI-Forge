@@ -1,0 +1,176 @@
+$primary-color: #2574A9;
+$secondary-color: #22313F;
+$body-grey: rgb(251, 251, 251);
+$med-grey: #555;
+$rand-grey: #6c7f8a;
+
+html {
+  overflow-y:scroll;
+}
+
+textarea { 
+  resize: vertical;
+}
+
+table {
+  background-color: white;
+}
+
+th {
+  background-color: #eaeaea;
+}
+
+input {
+  border: none;
+}
+
+textarea{
+  border: none;
+}
+
+body{
+  background-color: $body-grey;
+}
+
+.table {
+	table-layout:fixed;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.btn-toolbar {
+    padding: 5px;
+}
+.btn-warning{
+  background-color: $rand-grey;
+  border-color: $rand-grey;
+  &:hover {
+        background-color: $rand-grey;
+        border-color: $rand-grey;
+  }
+  &:focus{
+        background-color: $rand-grey;
+        border-color: $rand-grey;
+  }
+  &:hover:active{
+        background-color: $rand-grey;
+        border-color: $rand-grey;
+  }
+}
+
+
+.panel-default>.panel-heading{
+  color: white;
+  background-color: $primary-color;
+}
+
+.panel-body {
+    padding: 10px;
+}
+
+.panel-top{
+  margin-top: 20px;
+}
+
+.navbar{
+  margin-bottom: 0px;
+}
+
+.table {
+  td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.container {
+    width: 100%;
+}
+
+.footer {
+  padding: 100px;
+  height: 300px;
+}
+
+.btn {
+  border-radius: 20px;
+}
+
+.panel-body {
+  padding: 5px;
+}
+
+.navbar-inverse {
+    background-color: $secondary-color;
+}
+
+.navbar-inverse .navbar-brand {
+    color: white;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+    color: white;
+}
+
+.table>tbody>tr>td {
+
+    border-top: 0px;
+}
+
+.modal-dialog {
+    width: 1000px;
+    margin: 30px auto;
+}
+
+.modal-header {
+  background-color: $primary-color;
+  color: white;
+  border-radius: 5px;
+}
+
+.close {
+  color: white;
+  opacity: 1;
+}
+
+.rowExpanded {
+  margin: 20px;
+}
+
+.ace_editor { 
+  height: 400px; 
+}
+
+.underlined{
+  border-bottom: 2px solid $primary-color;
+  border-radius: 0px;
+  box-shadow: none;
+  display: block;
+  width: 100%;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: $med-grey;
+  background-color: white;
+}
+
+.tableToolbarBottom{
+  padding: 5px;
+}
+
+.input-group-addon {
+    color: white;
+    background-color: $primary-color;
+    border: 0px;
+}
+
+.input-group {
+  width: 80%;
+}
+
+.iframe {
+  width: 100%;
+  height: 500px;
+}

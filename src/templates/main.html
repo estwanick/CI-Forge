@@ -1,0 +1,163 @@
+<div class="container">
+      <section>
+        <div class="panel panel-default panel-top">
+            <div class="panel-heading">URL</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-1">
+                        <label>Method:</label>
+                        <select class="form-control" ng-model="method">
+                            <option ng-selected= "{{methodType == method}}" ng-repeat="methodType in methods" 
+                            value="{{methodType}}">{{methodType}}     
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-md-11">
+                        <label>URL:</label>
+                        <input type="text" class="underlined" placeholder="URL to Fuzz" ng-model="urlInput" ng-change="getParamsFromUrl(urlInput, paramList)"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="panel panel-default">
+            <div class="panel-heading">Headers</div>
+            <div class="panel-body">
+                <table class="table">
+                    <tbody>
+                        <tr ng-repeat="header in headerList track by $index">
+                            <td class="col-xs-2">
+                                <input type="text" class="underlined" ng-model="header.key" placeholder="Key" ng-keyup="onHeaderSelected(this)"/>                                
+                                <ul class="list-group" ng-if="header.vis">
+                                    <li class="list-group-item"
+                                    ng-repeat="headerText in header.filterHeaders" ng-click="fillHeader(headerText,header)">{{ headerText }}</li>
+                                </ul>
+                            </td>
+                            <td class="col-xs-8">
+                                <textarea rows="1" class="underlined" ng-model="header.value" placeholder="Value" />
+                            </td>
+                            <td class="col-xs-1">
+                                <a ng-click="removeItem(headerList, $index)">Remove</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="btn-toolbar" role="toolbar">
+                    <button type="button" class="btn btn-default" ng-click="addParameter(headerList)">Add Value</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="panel panel-default">
+            <div class="panel-heading">Query Parameters</div>
+            <div class="panel-body">
+                <table class="table">
+                    <tbody>
+                        <tr ng-repeat="param in paramList track by $index">
+                            <td class="col-xs-2"><input type="text" ng-model="param.key" class="underlined" placeholder="Query Parameter" /></td>
+                            <td class="col-xs-8">
+                                <textarea ng-model="param.value" rows="1" class="underlined" placeholder="Value" />
+                                <a class="pull-right" ng-click="param.expanded = true">See More</a>
+                                <div class="rowExpanded" ng-if="param.expanded">
+                                    <attack-selector field="param.value"></attack-selector>
+                                    <a ng-click="param.expanded = false">Hide</a>
+                                </div>
+                            </td>
+                            <td class="col-xs-1">
+                                <a ng-click="showAModal(this)">Attacks</a>
+                            </td>
+                            <td class="col-xs-1">
+                                <a ng-click="removeItem(paramList, $index)">Remove</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="btn-toolbar" role="toolbar">
+                    <div class="pull-left">
+                        <button type="button" class="btn btn-default" ng-click="getParamsFromUrl(urlInput, paramList)">Get Params</button>
+                        <button type="button" class="btn btn-default" ng-click="addParameter(paramList)">Add Parameter</button>
+                        <button type="button" class="btn btn-warning" ng-click="randomizeValues(paramList)">Random Data</button>
+                    </div>
+                    <div class="pull-right">
+                        <button type="button" ng-disabled="urlInput.length == 0" class="btn btn-primary" ng-click="addRequest(urlInput, paramList, method, headerList, requestBody)">Add to Batch</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section ng-if="method != 'GET'">
+        <div class="panel panel-default">
+            <div class="panel-heading">Body</div>
+            <div class="panel-body">
+                <div class="btn-toolbar" role="toolbar">
+                    <div class="pull-left">
+                        <button type="button" ng-class="bodyType == 'RAW' ? 'btn btn-primary' : 'btn btn-default'" ng-click="setEditor('RAW')">RAW</button>
+                        <button type="button" ng-class="bodyType == 'XML' ? 'btn btn-primary' : 'btn btn-default'" ng-click="setEditor('XML')">XML</button>
+                        <button type="button" ng-class="bodyType == 'JSON' ? 'btn btn-primary' : 'btn btn-default'" ng-click="setEditor('JSON')">JSON</button>
+                    </div>
+                </div>
+                <div id="bodyEditor" ng-model="requestBody" ui-ace="{onLoad: aceLoaded}"></div>
+                <div class="btn-toolbar" role="toolbar">
+                    <div class="pull-left">
+                        <button type="button" class="btn btn-warning" ng-click="randomizeBody()">Randomize Data</button>
+                    </div>
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-primary" ng-disabled="urlInput.length == 0" ng-click="addRequest(urlInput, paramList, method, headerList, requestBody)">Add to Batch</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="panel panel-default">
+            <div class="panel-heading">Batch</div>
+            <div class="panel-body">
+                <div class="container" ng-if="urlBatch.length <= 0">
+                    <h4>No requests have been batched, add requests to batch above.</h4>      
+                </div>
+                <section ng-if="urlBatch.length > 0">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="col-xs-1">Method</th>
+                                <th class="col-xs-9">URL</th>
+                                <th class="col-xs-1">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="request in urlBatch track by $index">
+                                <td>
+                                    {{ request.method }}
+                                </td>
+                                <td>
+                                    {{ request.url }}
+                                </td>
+                                <td>
+                                    <a ng-click="removeItem(urlBatch, $index)">Remove</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+                <div class="tableToolbarBottom">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <label for="delay">Delay: </label>
+                            <input id="delay" type="number" class="form-control" step="1000" ng-model="delay" />
+                        </div>
+                        <button ng-disabled="urlBatch.length == 0" type="button" class="btn btn-primary" ng-click="startFuzzing(delay)">Execute</button>
+                        <div class="pull-right">
+                            <button ng-disabled="urlBatch.length == 0" type="button" class="btn btn-danger" ng-click="emptyBatch()">Empty Batch</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,44 @@
+<!-- TODO: Add more details for request on button press to expand row-->
+<div class="container">
+    <section>
+        <div class="panel panel-default panel-top">
+            <div class="panel-heading">Batch Results</div>
+            <div class="panel-body">   
+                <div class="btn-toolbar" role="toolbar">
+                    <div class="pull-left">
+                        <button ng-disabled="requestList.length == 0" type="button" class="btn btn-default" ng-click="retryBatch(requestList)">Retry Batch</button>
+                        <button ng-disabled="requestList.length == 0" type="button" class="btn btn-danger" ng-click="stop()">STOP</button>
+                    </div>
+                    <div class="pull-right">
+                        <button  ng-disabled="requestList.length == 0" type="button" class="btn btn-danger" ng-click="clearBatch(requestList)">Clear</button>
+                    </div>
+                </div>
+                <div class="container" ng-if="requestList.length <= 0">
+                    <h4>You have not started any batch requests, <a href="#">return home</a> to begin.</h4>      
+                </div>
+                <section ng-if="requestList.length > 0">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="col-xs-1">Method</th>
+                                <th class="col-xs-5">Request URL</th>
+                                <th class="col-xs-3">Data</th>
+                                <th class="col-xs-1">Status</th>
+                                <th class="col-xs-2">Text</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="request in requestList track by $index">
+                                <td>{{ request.method }}</td>
+                                <td><a ng-click="viewResult(request)">{{ request.url }}</a></td>
+                                <td>{{ request.data }}</td>
+                                <td>{{ request.status }}</td>
+                                <td>{{ request.text }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+        </div>
+    </section>
+</div>

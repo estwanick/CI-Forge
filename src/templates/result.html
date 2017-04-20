@@ -1,0 +1,73 @@
+<div class="container">
+    <section>
+        <div class="panel panel-default panel-top">
+            <div class="panel-heading">Request Details</div>
+            <div class="panel-body">
+                <form class="form-horizontal">
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Request:</label>
+                            <div class="col-md-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon">{{ method }}</span>
+                                    <input type="text" class="underlined" ng-model="url" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-if="headers.length > 0">
+                            <label class="col-md-2 control-label">Headers:</label>
+                            <div class="col-md-10">
+                                <div class="form-group row" ng-repeat="header in headers track by $index">
+                                    <div class="col-md-2">
+                                        <input type="text" class="underlined" ng-model="header.key" readonly>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="text" class="underlined" ng-model="header.value" readonly </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div ng-if="method != 'GET'">
+                                <label class="col-md-2 control-label">Body:</label>
+                                <div class="col-md-10">
+                                    <div ng-model="body" ng-readonly="true" ui-ace="{mode: 'text', useWrapMode : true}"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="panel panel-default panel-top">
+            <div class="panel-heading">Response</div>
+            <div class="panel-body">
+                <form class="form-horizontal">
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Response Type:</label>
+                            <div class="col-md-10">
+                                <div class="input-group">
+                                    <input type="text" class="underlined" ng-model="contentType" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+                <div ng-model="response" ui-ace="{mode: 'text', useWrapMode : true}" ng-readonly="true"></div>
+            </div>
+        </div>
+    </section>
+
+    <section ng-if="html">
+        <div class="panel panel-default panel-top">
+            <div class="panel-heading">iFrame Response</div>
+            <div class="panel-body">
+                <iframe class="center-block iframe" srcdoc={{html}}></iframe>
+            </div>
+        </div>
+    </section>
+</div>

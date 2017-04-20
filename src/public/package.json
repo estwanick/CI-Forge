@@ -1,0 +1,21 @@
+{
+  "name": "window",
+  "version": "1.0.0",
+  "description": "Automated Fuzzing for Web Requets",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.6.2",
+    "angular-modal-service": "^0.11.1",
+    "angular-route": "^1.6.2",
+    "angular-sanitize": "^1.6.4",
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.1.1",
+    "jsoneditor": "^5.5.11",
+    "read-file": "^0.2.0"
+  }
+}
