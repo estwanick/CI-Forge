@@ -27,8 +27,7 @@
           "rpm"
         ]
       },
-      "electronPackagerConfig": {
-      },
+      "electronPackagerConfig": {},
       "electronWinstallerConfig": {
         "name": "forge_app"
       },
