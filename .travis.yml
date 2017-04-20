@@ -4,3 +4,5 @@ node_js:
 os:
 - linux
 - osx
+after_success:
+- electron-forge make
