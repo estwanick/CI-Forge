@@ -3,6 +3,22 @@ platform:
 - x64
 environment:
   nodejs_version: "6"
+branches:
+  only:
+  - master
+
+install:
+- ps: Install-Product node $env:nodejs_version $env:platform
+- npm install -g npm@4
+- set PATH=%APPDATA%\npm;%PATH%
+- npm install
+
+test_script:
+- node --version
+- npm --version
+- npm test -- --installer=%node_installer%
+
 on_success:
 - electron-forge publish --target=s3
+
 build: off
