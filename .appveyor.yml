@@ -10,6 +10,7 @@ branches:
 install:
 - ps: Install-Product node $env:nodejs_version $env:platform
 - npm install -g npm@4
+- npm install -g electron-forge
 - set PATH=%APPDATA%\npm;%PATH%
 - npm install
 
@@ -20,3 +21,5 @@ test_script:
 
 on_success:
 - electron-forge publish --target=s3
+
+build: off
