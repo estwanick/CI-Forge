@@ -16,41 +16,39 @@ app.controller('mainController',
     const allAttacks = appConstants.getAllAttacks();
     const attackCount = allAttacks.length;
     
-
     let aceEditor;
     $scope.aceLoaded = function(_editor) {
         _editor.$blockScrolling = Infinity;
         aceEditor = _editor.getSession();
         aceEditor.setMode("ace/mode/text");
-    };
-
-    $scope.setEditor = function(mode){
-        console.log(aceEditor);
-        if(mode === 'XML'){
-            $scope.bodyType = "XML";
-            aceEditor.setMode('xml');
-        }else if(mode === 'JSON'){
-            $scope.bodyType = "JSON";
-            aceEditor.setMode('json');
-        }else{
-            $scope.bodyType = "RAW";
-            aceEditor.setMode('text');
-        }
-    };
-
+        $scope.setEditor = function(mode){
+            if(mode === 'XML'){
+                $scope.bodyType = "XML";
+                aceEditor.setMode('ace/mode/xml');
+            }else if(mode === 'JSON'){
+                $scope.bodyType = "JSON";
+                aceEditor.setMode('ace/mode/json');
+            }else{
+                $scope.bodyType = "RAW";
+                aceEditor.setMode('ace/mode/text');
+            }
+        };
     $scope.randomizeBody = function(){
         //TODO: Pass $scope.bodyType to this function instead of it being global
         //Read XML or JSON body and insert randomized fuzz into each field value
-        let requestBody = aceEditor.getValue();
+        let reqBody = aceEditor.getValue();
+         console.log(reqBody);
         //console.log($scope.bodyType + ":" + requestBody);
         if($scope.bodyType === "JSON"){ //catch valid json error
-            //Convert to json
+            //Convert to json\
+            let jObj = {};
+            let jsonString = "";
             try{
-                let jObj = JSON.parse(requestBody);
+                jObj = JSON.parse(reqBody);
             }catch (e){
                 alert("Please enter valid JSON.");
-            }
-            
+            } 
+
             //Replace values with junk
             for(let key in jObj){
                 var attackValue = allAttacks[Math.floor((Math.random() * attackCount))];
@@ -58,16 +56,18 @@ app.controller('mainController',
                 //Add option to traverse entire object
             }
             //convert back and display
-            aceEditor.setValue(JSON.stringify(jObj));
-            $scope.requestBody = JSON.stringify(jObj);
+            jsonString = JSON.stringify(jObj);
+            aceEditor.setValue(jsonString);
+            $scope.requestBody = jsonString;
         }else{
             let randomString = "";
-            for(let i = 0; i < 2; i++){
+            for(let i = 0; i < 10; i++){
                 randomString = randomString + allAttacks[Math.floor((Math.random() * attackCount))].value;
             }
             aceEditor.setValue(randomString);
             $scope.requestBody = randomString;
         }
+    };
     };
 
     $scope.getParamsFromUrl = function (urlString, pList) {    
@@ -110,11 +110,12 @@ app.controller('mainController',
         );
     };
 
-    $scope.addRequest = function (oUrl, inputParams, method, headers, requestBody) {
+    $scope.addRequest = function (oUrl, inputParams, method, headers) {
 
         let paramString = "";
         let newURL = "";
-
+        let requestBody = aceEditor.getValue();
+        console.log(requestBody);
         if (!inputParams || inputParams.length < 0) {
             $scope.urlBatch.push({
                 url: oUrl,

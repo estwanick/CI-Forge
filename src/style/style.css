@@ -108,6 +108,13 @@ body {
 .ace_editor {
   height: 400px; }
 
+.ace_editor, .ace_editor div {
+  font: 12px/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace; }
+  .ace_editor .ace_line, .ace_editor div .ace_line {
+    font: 12px/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace; }
+    .ace_editor .ace_line span, .ace_editor div .ace_line span {
+      font: 12px/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace; }
+
 .underlined {
   border-bottom: 2px solid #2574A9;
   border-radius: 0px;
