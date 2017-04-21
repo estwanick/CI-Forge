@@ -60,7 +60,7 @@
                         <tr ng-repeat="param in paramList track by $index">
                             <td class="col-xs-2"><input type="text" ng-model="param.key" class="underlined" placeholder="Query Parameter" /></td>
                             <td class="col-xs-8">
-                                <textarea ng-model="param.value" rows="1" class="underlined" placeholder="Value" />
+                                <textarea ng-model="param.value" rows="1" class="underlined" placeholder="Value"></textarea>
                                 <a class="pull-right" ng-click="param.expanded = true">See More</a>
                                 <div class="rowExpanded" ng-if="param.expanded">
                                     <attack-selector field="param.value"></attack-selector>
