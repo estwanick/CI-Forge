@@ -3,6 +3,20 @@
 https://github.com/josdejong/jsoneditor
 
 
+## 2017-04-15, version 5.6.0
+
+- Implemented readonly option for modes `text` and `code.`
+  Thanks @walkerrandolphsmith.
+- Upgraded dependencies (`brance` and `ajv`) to the latest versions.
+- Fixed not being able to move focus to enum select box when clicking
+  a JSON Schema warning.
+- Fixed #309: already loaded version of Ace being overwritten by the
+  embedded version of JSONEditor.
+- Fixed #368: Mode selection drop down not fully visible on small screen.
+- Fixed #253: Optimize the input experience of Chinese IME.
+  Thanks @chinesedfan.
+
+
 ## 2017-01-06, version 5.5.11
 
 - Fixed embedded version of jsoneditor ace theme not being loaded in

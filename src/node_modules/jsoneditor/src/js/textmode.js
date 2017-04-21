@@ -1,13 +1,6 @@
 'use strict';
 
-var ace;
-try {
-  ace = require('./ace');
-}
-catch (err) {
-  // failed to load ace, no problem, we will fall back to plain text
-}
-
+var ace = require('./ace');
 var ModeSwitcher = require('./ModeSwitcher');
 var util = require('./util');
 
@@ -31,6 +24,8 @@ var DEFAULT_THEME = 'ace/theme/jsoneditor';
  *                                                       triggered on change
  *                             {function} onModeChange   Callback method
  *                                                       triggered after setMode
+ *                             {function} onEditable     Determine if textarea is readOnly
+ *                                                       readOnly defaults true
  *                             {Object} ace              A custom instance of
  *                                                       Ace editor.
  *                             {boolean} escapeUnicode   If true, unicode
@@ -53,6 +48,7 @@ textmode.create = function (container, options) {
 
   // grab ace from options if provided
   var _ace = options.ace ? options.ace : ace;
+  // TODO: make the option options.ace deprecated, it's not needed anymore (see #309)
 
   // determine mode
   this.mode = (options.mode == 'code') ? 'code' : 'text';
@@ -66,8 +62,13 @@ textmode.create = function (container, options) {
 
   // determine theme
   this.theme = options.theme || DEFAULT_THEME;
-  if (this.theme === DEFAULT_THEME && window.ace) {
-    require('./ace/theme-jsoneditor');
+  if (this.theme === DEFAULT_THEME && _ace) {
+    try {
+      require('./ace/theme-jsoneditor');
+    }
+    catch (err) {
+      console.error(err);
+    }
   }
 
   var me = this;
@@ -139,6 +140,11 @@ textmode.create = function (container, options) {
     });
   }
 
+  var emptyNode = {};
+  var isReadOnly = (this.options.onEditable
+  && typeof(this.options.onEditable === 'function')
+  && !this.options.onEditable(emptyNode));
+
   this.content = document.createElement('div');
   this.content.className = 'jsoneditor-outer';
   this.frame.appendChild(this.content);
@@ -154,6 +160,7 @@ textmode.create = function (container, options) {
     var aceEditor = _ace.edit(this.editorDom);
     aceEditor.$blockScrolling = Infinity;
     aceEditor.setTheme(this.theme);
+    aceEditor.setOptions({ readOnly: isReadOnly });
     aceEditor.setShowPrintMargin(false);
     aceEditor.setFontSize(13);
     aceEditor.getSession().setMode('ace/mode/json');
@@ -201,6 +208,7 @@ textmode.create = function (container, options) {
     textarea.spellcheck = false;
     this.content.appendChild(textarea);
     this.textarea = textarea;
+    this.textarea.readOnly = isReadOnly;
 
     // register onchange event
     if (this.textarea.oninput === null) {

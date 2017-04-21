@@ -19,20 +19,22 @@ app.controller('mainController',
 
     let aceEditor;
     $scope.aceLoaded = function(_editor) {
+        _editor.$blockScrolling = Infinity;
         aceEditor = _editor.getSession();
         aceEditor.setMode("ace/mode/text");
     };
 
     $scope.setEditor = function(mode){
+        console.log(aceEditor);
         if(mode === 'XML'){
             $scope.bodyType = "XML";
-            aceEditor.setMode('ace/mode/xml');
+            aceEditor.setMode('xml');
         }else if(mode === 'JSON'){
             $scope.bodyType = "JSON";
-            aceEditor.setMode('ace/mode/json');
+            aceEditor.setMode('json');
         }else{
             $scope.bodyType = "RAW";
-            aceEditor.setMode('ace/mode/text');
+            aceEditor.setMode('text');
         }
     };
 
@@ -57,26 +59,14 @@ app.controller('mainController',
             }
             //convert back and display
             aceEditor.setValue(JSON.stringify(jObj));
-            
-        }else if($scope.bodyType === "XML"){
-            //Parse xml into object
-            let parser = new DOMParser();
-            xmlDoc = parser.parseFromString(requestBody, "text/xml");
-            nodes = xmlDoc.documentElement.childNodes;
-            //Replace values with junk
-            //convert back and display
-            let randomString = "";
-            for(let i = 0; i < 10; i++){
-                randomString = randomString + allAttacks[Math.floor((Math.random() * attackCount))].value;
-            }
-            aceEditor.setValue(randomString);
-            
+            $scope.requestBody = JSON.stringify(jObj);
         }else{
             let randomString = "";
-            for(let i = 0; i < 10; i++){
+            for(let i = 0; i < 2; i++){
                 randomString = randomString + allAttacks[Math.floor((Math.random() * attackCount))].value;
             }
             aceEditor.setValue(randomString);
+            $scope.requestBody = randomString;
         }
     };
 
@@ -171,6 +161,7 @@ app.controller('mainController',
             headers: cleanedHeaders,
             body: requestBody
         });
+        console.log(requestBody);
         urlList.setURLs($scope.urlBatch);
     };
 

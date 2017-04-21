@@ -40,7 +40,7 @@ app.controller('requestsController',
     let errDelay = delay;
 
     function onRequestComplete(response, index) {
-        console.log(response);
+        //console.log(response);
 
         //This needs to be tested
         if(response.status == -1){
@@ -65,7 +65,7 @@ app.controller('requestsController',
                 "status": response.status,
                 "text": response.statusText
             };
-
+        console.log(requestObj);
         $scope.requestList.push(requestObj);
         resultsCache.addRequest(requestObj);
         requestHistory.appendRequest(requestObj);
@@ -86,6 +86,7 @@ app.controller('requestsController',
     };
 
     $scope.viewResult = function(oRequest){
+        console.log(oRequest);
         requestResult.setURL(oRequest.url);
         requestResult.setMethod(oRequest.method);
         requestResult.setBody(oRequest.body);
