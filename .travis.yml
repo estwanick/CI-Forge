@@ -6,8 +6,5 @@ os:
 - osx
 before_script:
 - npm install
-- cd src
-- npm install
-- cd ..
 after_success:
 - electron-forge publish --target=s3
