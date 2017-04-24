@@ -4,7 +4,5 @@ node_js:
 os:
 - linux
 - osx
-before_script:
-- npm install
 after_success:
 - electron-forge publish --target=s3
