@@ -37,7 +37,7 @@ app.controller('mainController',
         //TODO: Pass $scope.bodyType to this function instead of it being global
         //Read XML or JSON body and insert randomized fuzz into each field value
         let reqBody = aceEditor.getValue();
-         console.log(reqBody);
+        //console.log(reqBody);
         //console.log($scope.bodyType + ":" + requestBody);
         if($scope.bodyType === "JSON"){ //catch valid json error
             //Convert to json\
@@ -114,8 +114,15 @@ app.controller('mainController',
 
         let paramString = "";
         let newURL = "";
-        let requestBody = aceEditor.getValue();
-        console.log(requestBody);
+        let requestBody;
+        try{
+            requestBody = aceEditor.getValue();
+        }catch(e){
+            requestBody = "";
+        }
+
+        
+        //console.log(requestBody);
         if (!inputParams || inputParams.length < 0) {
             $scope.urlBatch.push({
                 url: oUrl,
@@ -162,7 +169,7 @@ app.controller('mainController',
             headers: cleanedHeaders,
             body: requestBody
         });
-        console.log(requestBody);
+        //console.log(requestBody);
         urlList.setURLs($scope.urlBatch);
     };
 
