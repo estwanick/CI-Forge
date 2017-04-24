@@ -13,6 +13,9 @@ install:
 - npm install -g electron-forge
 - set PATH=%APPDATA%\npm;%PATH%
 - npm install
+- dir src
+- npm install
+- dir ..
 
 test_script:
 - node --version
