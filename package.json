@@ -41,6 +41,7 @@
         "name": "Auto-Fuzzer",
         "icon": "icon/icon512.png"
       },
+      "electronInstallerRedhat": {},
       "electronInstallerDMG": {
         "name": "Auto-Fuzzer",
         "icon": "icon/icon512.icns"
