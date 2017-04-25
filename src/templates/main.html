@@ -4,7 +4,7 @@
             <div class="panel-heading">URL</div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-md-1">
+                    <div class="col-md-2">
                         <label>Method:</label>
                         <select class="form-control" ng-model="method">
                             <option ng-selected= "{{methodType == method}}" ng-repeat="methodType in methods" 
@@ -12,7 +12,7 @@
                             </option>
                         </select>
                     </div>
-                    <div class="col-md-11">
+                    <div class="col-md-10">
                         <label>URL:</label>
                         <input type="text" class="underlined" placeholder="URL to Fuzz" ng-model="urlInput" ng-change="getParamsFromUrl(urlInput, paramList)"/>
                     </div>

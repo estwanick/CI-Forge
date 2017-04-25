@@ -1,6 +1,6 @@
 {
-  "name": "forge-app1",
-  "productName": "forge-app",
+  "name": "auto-fuzzer",
+  "productName": "Auto-Fuzzer",
   "version": "1.0.0",
   "description": "My Electron application description",
   "main": "src/index.js",
@@ -30,12 +30,21 @@
           "deb"
         ]
       },
-      "electronPackagerConfig": {},
-      "electronWinstallerConfig": {
-        "name": "forge_app"
+      "electronPackagerConfig": {
+        "icon": "icon/icon512"
       },
-      "electronInstallerDebian": {},
-      "electronInstallerRedhat": {},
+      "electronWinstallerConfig": {
+        "name": "Auto-Fuzzer",
+        "icon": "icon/icon512.ico"
+      },
+      "electronInstallerDebian": {
+        "name": "Auto-Fuzzer",
+        "icon": "icon/icon512.png"
+      },
+      "electronInstallerDMG": {
+        "name": "Auto-Fuzzer",
+        "icon": "icon/icon512.icns"
+      },
       "s3": {
         "accessKeyId": "AKIAJVPXWHCWAWTWAAEQ",
         "bucket": "auto-fuzzer-dev-build",
@@ -47,7 +56,7 @@
       },
       "windowsStoreConfig": {
         "packageName": "",
-        "name": "forgeapp"
+        "name": "Auto-Fuzzer"
       }
     }
   },

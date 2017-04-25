@@ -1,5 +1,5 @@
 import { app, BrowserWindow } from 'electron';
-
+let path = require('path');
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
@@ -12,6 +12,7 @@ const createWindow = () => {
     minWidth: 800, 
     minHeight: 600
   });
+
 
   // and load the index.html of the app.
   mainWindow.loadURL(`file://${__dirname}/index.html`);
