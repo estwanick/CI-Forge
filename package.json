@@ -38,7 +38,6 @@
         "icon": "icon/icon512.ico"
       },
       "electronInstallerDebian": {
-        "name": "Auto-Fuzzer",
         "icon": "icon/icon512.png"
       },
       "electronInstallerRedhat": {},
